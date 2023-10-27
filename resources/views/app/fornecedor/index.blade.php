@@ -3,7 +3,7 @@
 @section('titulo', 'Fornecedor')
 
 @section('conteudo')
-
+    
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
@@ -26,10 +26,11 @@
                     <input type="text" name="uf" placeholder="UF" class="borda-preta">
                     <input type="text" name="email" placeholder="E-mail" class="borda-preta">
                     <button type="submit" class="borda-preta">Pesquisar</button>
-                </form>
+                <form>
             </div>
         </div>
 
     </div>
 
 @endsection
+

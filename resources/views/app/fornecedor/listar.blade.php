@@ -3,7 +3,7 @@
 @section('titulo', 'Fornecedor')
 
 @section('conteudo')
-
+    
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
@@ -29,10 +29,10 @@
                             <th></th>
                             <th></th>
                         </tr>
-                    </thead>
+                    </head>
 
                     <tbody>
-                        @foreach ($fornecedores as $fornecedor)
+                        @foreach($fornecedores as $fornecedor)
                             <tr>
                                 <td>{{ $fornecedor->nome }}</td>
                                 <td>{{ $fornecedor->site }}</td>
@@ -45,25 +45,26 @@
                     </tbody>
                 </table>
 
-                {{ $fornecedores->links() }}
+                
+                {{ $fornecedores->appends($request)->links() }}
 
                 <!--
-                        <br>
-                        {{ $fornecedores->count() }} - Total de registros por página
-                        <br>
-                        {{ $fornecedores->total() }} - Total de registros da consulta
-                        <br>
-                        {{ $fornecedores->firstItem() }} - Número do primeiro registro da página
-                        <br>
-                        {{ $fornecedores->lastItem() }} - Número do último registro da página
-
-                        -->
                 <br>
-                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }} (de
-                {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
+                {{ $fornecedores->count() }} - Total de registros por página
+                <br>
+                {{ $fornecedores->total() }} - Total de registros da consulta
+                <br>
+                {{ $fornecedores->firstItem() }} - Número do primeiro registro da página
+                <br>
+                {{ $fornecedores->lastItem() }} - Número do último registro da página
+
+                -->
+                <br>
+                Exibindo {{ $fornecedores->count() }} fornecedores de {{ $fornecedores->total() }} (de {{ $fornecedores->firstItem() }} a {{ $fornecedores->lastItem() }})
             </div>
         </div>
 
     </div>
 
 @endsection
+

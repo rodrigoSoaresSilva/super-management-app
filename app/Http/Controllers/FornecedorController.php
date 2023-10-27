@@ -19,7 +19,7 @@ class FornecedorController extends Controller
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
             ->paginate(2);
-        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request]);
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
 
     public function adicionar(Request $request)
@@ -39,7 +39,6 @@ class FornecedorController extends Controller
                 'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
                 'uf.min' => 'O campo nome deve ter no mínimo 2 caracteres',
                 'uf.max' => 'O campo nome deve ter no máximo 2 caracteres',
-                'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
                 'email.email' => 'O campo e-mail não foi preenchido corretamente',
             ];
 
