@@ -14,7 +14,7 @@ class FornecedorController extends Controller
 
     public function listar(Request $request)
     {
-        $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+        $fornecedores = Fornecedor::with(['produtos'])->where('nome', 'like', '%'.$request->input('nome').'%')
             ->where('site', 'like', '%'.$request->input('site').'%')
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
@@ -25,7 +25,7 @@ class FornecedorController extends Controller
     public function adicionar(Request $request)
     {
         // Adicionar
-        if(!empty($request->input('_token')) && empty($request->input('id'))) {
+        if (!empty($request->input('_token')) && empty($request->input('id'))) {
             $regras = [
                 'nome' => 'required|min:3|max:40',
                 'site' => 'required',
@@ -51,11 +51,11 @@ class FornecedorController extends Controller
         }
 
         // Editar
-        if(!empty($request->input('_token')) && !empty($request->input('id'))) {
+        if (!empty($request->input('_token')) && !empty($request->input('id'))) {
             $fornecedor = Fornecedor::find($request->input('id'));
             $update = $fornecedor->update($request->all());
 
-            if($update) {
+            if ($update) {
                 $msg = 'Atualizado com sucesso';
             } else {
                 $msg = 'Falha ao atualizar registro';
