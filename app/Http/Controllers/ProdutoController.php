@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use App\Models\Item;
 use App\Models\Unidade;
+use App\Models\ProdutoDetalhe;
 
 class ProdutoController extends Controller
 {
@@ -13,7 +15,8 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos = Produto::paginate(2);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10);
+
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }
 
@@ -69,7 +72,7 @@ class ProdutoController extends Controller
     public function edit(string $id)
     {
         $unidades = Unidade::all();
-        $produto = Produto::find($id);
+        $produto = Produto::with(['item'])->find($id);
         return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
