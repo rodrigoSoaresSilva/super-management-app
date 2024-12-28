@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\Item;
 use App\Models\Unidade;
 use App\Models\ProdutoDetalhe;
+use App\Models\Fornecedor;
 
 class ProdutoController extends Controller
 {
@@ -26,7 +27,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -38,7 +40,8 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
-            'unidade_id' => 'exists:unidades,id' //<tabela>,<coluna>
+            'unidade_id' => 'exists:unidades,id', //<tabela>,<coluna>
+            'fornecedor_id' => 'exists:fornecedores,id',
         ];
 
         $mensagens = [
@@ -49,11 +52,12 @@ class ProdutoController extends Controller
             'peso.max' => 'O campo nome deve ter no máximo 2000 caracteres',
             'peso.integer' => 'O campo peso deve ser um número inteiro',
             'unidade_id' => 'A unidade de medida iformada não existe',
+            'fornecedor_id' => 'O fornecedor iformado não existe',
         ];
 
         $request->validate($regras, $mensagens);
 
-        Produto::create($request->all());
+        Item::create($request->all());
         return redirect()->route('produto.index');
     }
 
@@ -73,7 +77,8 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         $produto = Produto::with(['item'])->find($id);
-        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -81,7 +86,27 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $produto = Produto::find($id);
+        $produto = Item::find($id);
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+            'fornecedor_id' => 'exists:fornecedores,id',
+        ];
+
+        $mensagens = [
+            'required' => 'O campo deve ser preenchido',
+            'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+            'peso.min' => 'O campo nome deve ter no mínimo 3 caracteres',
+            'peso.max' => 'O campo nome deve ter no máximo 2000 caracteres',
+            'peso.integer' => 'O campo peso deve ser um número inteiro',
+            'unidade_id' => 'A unidade de medida iformada não existe',
+            'fornecedor_id' => 'O fornecedor iformado não existe',
+        ];
+
+        $request->validate($regras, $mensagens);
         $produto->update($request->all());
         return redirect()->route('produto.show', ['produto' => $produto]);
     }
