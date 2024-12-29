@@ -14,6 +14,6 @@ class ItemDetalhe extends Model
 
     public function item()
     {
-        return $this->hasOne('App\Item', 'produto_Id', 'id');
+        return $this->hasOne('App\Models\Item', 'produto_Id', 'id');
     }
 }

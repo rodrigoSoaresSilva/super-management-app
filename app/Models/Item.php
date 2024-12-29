@@ -14,11 +14,11 @@ class Item extends Model
 
     public function itemDetalhe()
     {
-        return $this->hasOne('App\ItemDetalhe', 'produto_Id', 'id');
+        return $this->hasOne('App\Models\ItemDetalhe', 'produto_Id', 'id');
     }
 
     public function fornecedor()
     {
-        return $this->belongsTo('App\Fornecedor');
+        return $this->belongsTo('App\Models\Fornecedor');
     }
 }

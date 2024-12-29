@@ -9,7 +9,7 @@
 <select name="fornecedor_id">
     <option>-- Selecione um Fornecedor --</option>
 
-    @foreach ($fornecedors as $fornecedor)
+    @foreach ($fornecedores as $fornecedor)
         <option value="{{ $fornecedor->id }}"
             {{ ($fornecedor->fornecedor_id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : '' }}>
             {{ $fornecedor->nome }}</option>

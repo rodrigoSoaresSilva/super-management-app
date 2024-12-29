@@ -13,6 +13,6 @@ class ProdutoDetalhe extends Model
 
     public function produto()
     {
-        return $this->belongsTo('App\Produto');
+        return $this->belongsTo('App\Models\Produto');
     }
 }
