@@ -1,13 +1,13 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Cliente')
+@section('titulo', 'Clientes')
 
 @section('conteudo')
 
     <div class="conteudo-pagina">
 
         <div class="titulo-pagina-2">
-            <p>Listagem de Cliente</p>
+            <p>Listagem de Clientes</p>
         </div>
 
         <div class="menu">
@@ -55,16 +55,16 @@
                 {{ $clientes->appends($request)->links() }}
 
                 <!--
-                                <br>
-                                {{ $clientes->count() }} - Total de registros por página
-                                <br>
-                                {{ $clientes->total() }} - Total de registros da consulta
-                                <br>
-                                {{ $clientes->firstItem() }} - Número do primeiro registro da página
-                                <br>
-                                {{ $clientes->lastItem() }} - Número do último registro da página
+                                        <br>
+                                        {{ $clientes->count() }} - Total de registros por página
+                                        <br>
+                                        {{ $clientes->total() }} - Total de registros da consulta
+                                        <br>
+                                        {{ $clientes->firstItem() }} - Número do primeiro registro da página
+                                        <br>
+                                        {{ $clientes->lastItem() }} - Número do último registro da página
 
-                                -->
+                                        -->
                 <br>
                 Exibindo {{ $clientes->count() }} clientes de {{ $clientes->total() }} (de {{ $clientes->firstItem() }} a
                 {{ $clientes->lastItem() }})
