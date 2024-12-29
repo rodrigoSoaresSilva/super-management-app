@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cliente;
 
-class ClienteController extends Controller
+class PedidoProdutoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $clientes = Cliente::paginate(10);
-        return view('app.cliente.index', ['clientes' => $clientes, 'request' => $request->all()]);
+        //
     }
 
     /**
