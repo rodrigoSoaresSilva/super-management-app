@@ -54,6 +54,18 @@
                                 </td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                             </tr>
+
+                            <tr>
+                                <td colspan="12">Exibir o ID dos Pedidos</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12">
+                                    @foreach ($produto->pedidos as $pedido)
+                                        <a href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Pedido:
+                                            {{ $pedido->id }}, </a>
+                                    @endforeach
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -62,16 +74,16 @@
                 {{ $produtos->appends($request)->links() }}
 
                 <!--
-                            <br>
-                            {{ $produtos->count() }} - Total de registros por página
-                            <br>
-                            {{ $produtos->total() }} - Total de registros da consulta
-                            <br>
-                            {{ $produtos->firstItem() }} - Número do primeiro registro da página
-                            <br>
-                            {{ $produtos->lastItem() }} - Número do último registro da página
+                                                    <br>
+                                                    {{ $produtos->count() }} - Total de registros por página
+                                                    <br>
+                                                    {{ $produtos->total() }} - Total de registros da consulta
+                                                    <br>
+                                                    {{ $produtos->firstItem() }} - Número do primeiro registro da página
+                                                    <br>
+                                                    {{ $produtos->lastItem() }} - Número do último registro da página
 
-                            -->
+                                                    -->
                 <br>
                 Exibindo {{ $produtos->count() }} produtos de {{ $produtos->total() }} (de {{ $produtos->firstItem() }} a
                 {{ $produtos->lastItem() }})

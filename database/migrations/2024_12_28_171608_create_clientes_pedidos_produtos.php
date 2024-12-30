@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->foreign('cliente_id')->references('id')->on('clientes');
         });
 
-        Schema::create('pedidos_produtos', function (Blueprint $table) {
+        Schema::create('pedido_produtos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id');
             $table->unsignedBigInteger('produto_id');
@@ -43,7 +43,7 @@ return new class extends Migration {
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('clientes');
         Schema::dropIfExists('pedidos');
-        Schema::dropIfExists('pedidos_produtos');
+        Schema::dropIfExists('pedido_produtos');
         Schema::enableForeignKeyConstraints();
     }
 };
