@@ -95,8 +95,24 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pedido $pedido, Produto $produto)
     {
-        //
+        print_r($pedido->getAttributes());
+        echo '<hr>';
+        print_r($produto->getAttributes());
+
+        /*
+        // Convencional
+        PedidoProduto::where([
+            'pedido_id' => $pedido->id,
+            'produto_id' => $produto->id,
+        ])->delete();
+        */
+
+        // Via relacionamento
+        // $produto->pedidos()->detach($pedido->id);
+        $pedido->produtos()->detach($produto->id);
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido]);
     }
 }
