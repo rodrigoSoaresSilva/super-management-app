@@ -34,18 +34,36 @@ class PedidoProdutoController extends Controller
     {
         $regras = [
             'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required',
         ];
 
         $feedback = [
             'produto_id.exists' => 'O produto informado não existe',
+            'required' => 'O campo :attribute deve possuir um valor válido'
         ];
 
         $request->validate($regras, $feedback);
 
+        /* Inclusão com nova instância do model auxiliar
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $pedido->id;
         $pedidoProduto->produto_id = $request->get('produto_id');
         $pedidoProduto->save();
+        */
+
+        /* Inclusão através do relacionamento
+            // $pedido->produtos // retorna os registros do relacionamento
+            // $pedido->produtos() // objeto que mapeia o relacionamento
+            // Um registro
+            $pedido->produtos()->attach(
+                $request->get('produto_id'),
+                ['quantidade' => $request->get('quantidade'),]
+            );
+         */
+        // Múltiplos registros
+        $pedido->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
     }
