@@ -95,12 +95,9 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pedido $pedido, Produto $produto)
+    // public function destroy(Pedido $pedido, Produto $produto)
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        print_r($pedido->getAttributes());
-        echo '<hr>';
-        print_r($produto->getAttributes());
-
         /*
         // Convencional
         PedidoProduto::where([
@@ -111,8 +108,10 @@ class PedidoProdutoController extends Controller
 
         // Via relacionamento
         // $produto->pedidos()->detach($pedido->id);
-        $pedido->produtos()->detach($produto->id);
+        // $pedido->produtos()->detach($produto->id);
 
-        return redirect()->route('pedido-produto.create', ['pedido' => $pedido]);
+        $pedidoProduto->delete();
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
     }
 }
